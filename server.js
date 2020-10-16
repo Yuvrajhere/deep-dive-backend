@@ -22,6 +22,11 @@ connection.once('open', () => {
   console.log(`mongoDB connection established successfully.`);
 });
 
+//importing routers
+const authRoutes = require("./routes/auth.route");
+
+//using routes
+app.use("/api", authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server listening at port ${PORT}`);
