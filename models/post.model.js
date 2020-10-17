@@ -46,8 +46,8 @@ const productSchema = new mongoose.Schema(
     comment: [{
       text: String,
       postedBy: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'User'
+          type: ObjectId,
+          ref: "User"
       }
     }],
     
