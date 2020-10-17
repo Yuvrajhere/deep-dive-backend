@@ -1,60 +1,47 @@
-const { Order, ProductCart } = require("../models/order");
+const Post = require("../models/post.model");
 
-exports.getOrderById = (req, res, next, id) => {
-  Order.findById(id)
-    .populate("products.product", "name price")
+exports.getPostById = (req, res, next, id) => {
+  Post.findById(id)
+    .populate("category")
+    .populate("artist")
+    .populate("postedBy")
+    .populate("comment.postedBy")
     .exec((err, order) => {
       if(err) {
         return res.status(400).json({
-          error: "NO order found in DB"
+          error: "NO post found in DB"
         });
       }
-      req.order = order;
+      req.post = post;
       next();
     });
   };
 
-exports.createOrder = (req, res) => {
-  req.body.order.user = req.profile;
-  const order = new Order(req.body.order)
-  order.save((err, order) => {
+exports.createPost = (req, res) => {
+  req.body.post.postedBy = req.profile;
+  const post = new Post(req.body.post)
+  post.save((err, post) => {
     if(err) {
       return res.status(400).json({
-        error: "Failed to save your order in DB"
+        error: "Failed to save your post in DB"
       });
     }
-    res.json(order);
+    res.json(post);
   })
 };
 
-exports.getAllOrders = (req, res) => {
-  Order.find()
-    .populate("user", "_id name")
-    .exec((err, order) => {
+exports.getAllPosts = (req, res) => {
+  Post.find()
+    .populate("category")
+    .populate("artist")
+    .populate("postedBy")
+    .populate("comment.postedBy")
+    .exec((err, post) => {
       if(err) {
         return res.status(400).json({
-          error: "No order found in DB"
+          error: "No post found in DB"
         });
       }
-      res.json(order);
+      res.json(post);
     });
-};
-
-exports.getOrderStatus = (req, res) => {
-  res.json(Order.schema.path("status").enumValues);
-}
-
-exports.updateStatus = (req, res) => {
-  Order.update(
-    {_id: req.body.orderId},
-    {$set: {status: req.body.status}},
-    (err, order) => {
-      if(err) {
-        return res.status(400).json({
-          error: "Cannot update order status"
-        });
-      }
-      res.json(order);
-    }
-  );
 };
