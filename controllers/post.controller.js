@@ -17,6 +17,10 @@ exports.getPostById = (req, res, next, id) => {
     });
   };
 
+exports.getPost = () => {
+  return res.json(req.post);
+}
+
 exports.createPost = (req, res) => {
   req.body.post.postedBy = req.profile;
   const post = new Post(req.body.post)
