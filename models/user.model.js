@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const { ObjectId } = mongoose.Schema;
 
 const userSchema = mongoose.Schema({
   username: {
@@ -21,11 +22,9 @@ const userSchema = mongoose.Schema({
     required: true
   },
   posts: [{
-    post: {
-      type: ObjectId,
-      ref: "Post",
-      default: []
-    }
+    type: ObjectId,
+    ref: "Post",
+    default: []
   }]
 }, {
   timestamps: true

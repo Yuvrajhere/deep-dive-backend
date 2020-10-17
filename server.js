@@ -34,12 +34,15 @@ const authRoutes = require("./routes/auth.route");
 const userRoutes = require("./routes/user.route");
 const categoryRoutes = require("./routes/category.route");
 const artistRoutes = require("./routes/artist.route");
+const postRoutes = require("./routes/post.route");
 
 //using routes
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
-app.use("/api", artistRoutes)
+app.use("/api", artistRoutes);
+app.use("/api", postRoutes);
+
 
 app.listen(PORT, () => {
   console.log(`Server listening at port ${PORT}`);

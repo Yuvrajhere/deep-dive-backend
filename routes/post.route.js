@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { getUserById, getUser } = require("../controllers/user.controller");
+const { getUserById } = require("../controllers/user.controller");
 const { getPostById, getPost, createPost, getAllPosts } = require("../controllers/post.controller");
 
 //params
@@ -12,10 +12,10 @@ router.param("postId", getPostById);
 //create
 router.post("/post/create/:userId", createPost);
 
-router.post("/post/:postId/:userId", getUser);
+router.post("/post/:postId/", getPost);
 
 //read
-router.get("/post/all/:userId", getAllPosts);
+router.get("/post/all/", getAllPosts);
 
 
 module.exports = router;
