@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 const app = express();
@@ -21,6 +23,11 @@ const connection = mongoose.connection;
 connection.once('open', () => {
   console.log(`mongoDB connection established successfully.`);
 });
+
+//Middlewares
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(cors());
 
 //importing routers
 const authRoutes = require("./routes/auth.route");

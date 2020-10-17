@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
+var expressJwt = require("express-jwt");
 
 exports.signup = (req, res) => {
   const errors = validationResult(req);
@@ -116,3 +117,11 @@ exports.signout = (req, res) => {
     message: "User signout Successfully"
   });
 };
+
+
+//protected routes
+exports.isSignedIn = expressJwt({
+  secret: process.env.SECRET,
+  userProperty: "auth",
+  algorithms: ['HS256'] 
+})

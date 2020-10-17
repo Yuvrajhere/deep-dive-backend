@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { check } = require("express-validator");
-const { signup, signin, signout } = require("../controllers/auth.controller");
+const { signup, signin, signout, isSignedIn } = require("../controllers/auth.controller");
 
 router.post(
   "/signup",
@@ -28,4 +28,17 @@ router.post(
 
 router.get("/signout", signout);
 
+
+router.get("/testroute", isSignedIn, (req, res) => {
+  if(!req.auth) {
+    return res.json({
+      error: "Not authorized!"
+    });
+  } else {
+    res.json(req.auth);
+  }
+})
+
+
+// if (!req.user.admin) return res.sendStatus(401);
 module.exports = router;
