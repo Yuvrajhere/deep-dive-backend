@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
-const productSchema = new mongoose.Schema(
+const postSchema = new mongoose.Schema(
   {
     heading: {
       type: String,
@@ -14,12 +14,6 @@ const productSchema = new mongoose.Schema(
       trim: true,
       required: true,
       maxlength: 2000
-    },
-    price: {
-      type: Number,
-      required: true,
-      maxlength: 32,
-      trim: true
     },
     category: {
       type: ObjectId,
@@ -55,4 +49,4 @@ const productSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Product", productSchema);
+module.exports = mongoose.model("Post", postSchema);

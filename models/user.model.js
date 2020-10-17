@@ -19,7 +19,14 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  posts: [{
+    post: {
+      type: ObjectId,
+      ref: "Post",
+      default: []
+    }
+  }]
 }, {
   timestamps: true
 });
@@ -29,7 +36,6 @@ userSchema.methods.generateHash = (password) => {
 };
 
 userSchema.methods.authenticate = (password, encryPassword) => {
-  // console.log(bcrypt.compareSync(password, encryPassword));
   return bcrypt.compareSync(password, encryPassword);
 };
 
