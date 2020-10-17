@@ -33,11 +33,13 @@ app.use(cors());
 const authRoutes = require("./routes/auth.route");
 const userRoutes = require("./routes/user.route");
 const categoryRoutes = require("./routes/category.route");
+const artistRoutes = require("./routes/artist.route");
 
 //using routes
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
+app.use("/api", artistRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server listening at port ${PORT}`);
