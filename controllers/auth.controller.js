@@ -42,7 +42,7 @@ exports.signup = (req, res) => {
 
       user.username = username;
       user.email = email.toLowerCase();
-      user.password = user.generateHash(password);
+      user.password = password;
 
       user.save((err, user) => {
         if (err) {
@@ -66,6 +66,7 @@ exports.signup = (req, res) => {
 
 
 exports.signin = (req, res) => {
+  console.log("request came")
   const { email, password } = req.body;
 
   const errors = validationResult(req);
@@ -85,7 +86,7 @@ exports.signin = (req, res) => {
         });
       }
 
-      if (!user.authenticate(password, user.password)) {
+      if (password != user.password) {
         return res.status(401).json({
           error: "Email and password do not match",
         });

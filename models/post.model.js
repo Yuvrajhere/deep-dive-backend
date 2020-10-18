@@ -21,8 +21,7 @@ const postSchema = new mongoose.Schema(
       required: true
     },
     artist: {
-      type: ObjectId,
-      ref: "Artist",
+      type: String,
       required: true
     },
     contentLink: {
@@ -38,11 +37,8 @@ const postSchema = new mongoose.Schema(
       default: 0
     },
     comment: [{
-      text: String,
-      postedBy: {
-          type: ObjectId,
-          ref: "User"
-      }
+      type: ObjectId,
+      ref: "Comment"
     }],
     
   },

@@ -20,12 +20,7 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
-  },
-  posts: [{
-    type: ObjectId,
-    ref: "Post",
-    default: []
-  }]
+  }
 }, {
   timestamps: true
 });
